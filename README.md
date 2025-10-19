@@ -1,36 +1,30 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# FolioFusion
 
-## Getting Started
+> FolioFusion — a customizable developer portfolio generator that creates responsive, shareable portfolio pages at URLs like `foliofusion.com/profile/<username>`.
 
-First, run the development server:
+## Project Overview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+* **Name:** FolioFusion
+* **Purpose:** Let developers quickly create, customize, and share portfolio pages with dynamic sections, themes, and a unique profile URL.
+* **Target users:** Students, developers, designers, freelancers.
+* **Primary goals:** Fast setup, clean responsive templates, and simple customization.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Key Features
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+* User profile setup (name, bio, avatar, contact, social links).
+* Dynamic sections: projects, skills, experience, education, achievements, blogs, certifications, and custom sections.
+* Generate shareable portfolio at `foliofusion.com/profile/<username>`.
+* Theme & layout customization: multiple templates + color palettes.
+* Responsive.
+* Export/Import JSON of profile data.
+* Authentication (email/password or OAuth — optional).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Tech Stack (suggested)
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+* **Frontend & SSR:** Next.js (app or pages) + React
+* **Styling:** Tailwind CSS
+* **Animations:** Framer Motion (optional)
+* **Database:** Supabase
+* **Auth:** NextAuth.js or custom JWT sessions
+* **Hosting:** Vercel (frontend + SSR)
+* **Design:** Figma (design files included)
