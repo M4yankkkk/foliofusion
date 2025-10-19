@@ -65,7 +65,7 @@ function Landingpage() {
           share your unique link.
         </p>
         <div className="button-container">
-         <Link href="/profile"><button className="btn btn-primary">Create Your Portfolio</button></Link> 
+         <Link href="/generate"><button className="btn btn-primary">Create Your Portfolio</button></Link> 
           <button className="btn btn-secondary">View Demo</button>
         </div>
       </div>

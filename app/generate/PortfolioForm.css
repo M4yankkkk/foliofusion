@@ -1,0 +1,131 @@
+.form-container {
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 32px;
+  border-radius: 24px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  font-family: Arial, sans-serif;
+}
+
+h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 8px;
+}
+
+p {
+  color: #6b7280;
+  margin-bottom: 16px;
+}
+
+label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+input[type="text"],
+input[type="url"],
+textarea {
+  width: 100%;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin-top: 4px;
+  font-size: 1rem;
+  outline: none;
+}
+
+input[type="text"]:focus,
+input[type="url"]:focus,
+textarea:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.full-width {
+  grid-column: span 2;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.input-prefix {
+  background-color: #f3f4f6;
+  padding: 8px 12px;
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.helper-text {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+.project-card {
+  border: 1px solid #d1d5db;
+  background-color: #f9fafb;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.add-project-btn {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #3b82f6;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.add-project-btn:hover {
+  text-decoration: underline;
+}
+
+.submit-section {
+  text-align: center;
+  padding-top: 16px;
+}
+
+.submit-section button {
+  background-color: #3b82f6;
+  color: #fff;
+  padding: 12px 32px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.submit-section button:hover {
+  background-color: #2563eb;
+}
+
+.message {
+  margin-top: 16px;
+  font-weight: 500;
+  color: #16a34a;
+}
