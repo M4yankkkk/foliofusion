@@ -8,6 +8,8 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 );
 
+
+
 export default function PortfolioForm() {
   const [formData, setFormData] = useState({
     username: "",
@@ -19,7 +21,7 @@ export default function PortfolioForm() {
     twitter: "",
     projects: [{ name: "", description: "", link: "" }],
     skills: "",
-    experience: "",
+    experience: [{ company: "", role: "", description: "", startMonthYear: "", endMonthYear: "" }],
   });
 
   const [loading, setLoading] = useState(false);
@@ -39,6 +41,19 @@ export default function PortfolioForm() {
     setFormData({
       ...formData,
       projects: [...formData.projects, { name: "", description: "", link: "" }],
+    });
+  };
+
+  const handleExperienceChange = (index, field, value) => {
+    const newExperience = [...formData.experience];
+    newExperience[index][field] = value;
+    setFormData({ ...formData, experience: newExperience });
+  };
+
+  const addExperience = () => {
+    setFormData({
+      ...formData,
+      experience: [...formData.experience, { company: "", role: "", description: "", startMonthYear: "", endMonthYear: "" }],
     });
   };
 
@@ -224,13 +239,45 @@ export default function PortfolioForm() {
       {/* Experience */}
       <section>
         <h2>Experience</h2>
-        <textarea
-          name="experience"
-          value={formData.experience}
-          onChange={handleChange}
-          placeholder="Share your professional experience..."
-          rows={4}
-        />
+        <p>Share your professional experience.</p>
+
+        {formData.experience.map((exp, index) => (
+          <div key={index} className="experience-card">
+            <input
+              type="text"
+              placeholder="Company Name"
+              value={exp.company}
+              onChange={(e) => handleExperienceChange(index, "company", e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Role"
+              value={exp.role}
+              onChange={(e) => handleExperienceChange(index, "role", e.target.value)}
+            />
+            <textarea
+              placeholder="Description"
+              rows={2}
+              value={exp.description}
+              onChange={(e) => handleExperienceChange(index, "description", e.target.value)}
+            />
+            <div className="month-year-inputs">
+              <input
+                type="month"
+                value={exp.startMonthYear}
+                onChange={(e) => handleExperienceChange(index, "startMonthYear", e.target.value)}
+              />
+              <input
+                type="month"
+                value={exp.endMonthYear}
+                onChange={(e) => handleExperienceChange(index, "endMonthYear", e.target.value)}
+              />
+            </div>
+          </div>
+        ))}
+        <button type="button" onClick={addExperience} className="add-experience-btn">
+          + Add Another Experience
+        </button>
       </section>
 
       {/* Submit */}

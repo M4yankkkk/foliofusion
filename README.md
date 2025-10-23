@@ -1,6 +1,6 @@
 # FolioFusion
 
-> FolioFusion — a customizable developer portfolio generator that creates responsive, shareable portfolio pages at URLs like `foliofusion.com/profile/<username>`.
+> FolioFusion — a customizable developer portfolio generator that creates responsive, shareable portfolio pages at URLs like `foliofusion.vercel.app/profile/<username>`.
 
 ## Project Overview
 

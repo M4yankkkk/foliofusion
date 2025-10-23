@@ -28,6 +28,15 @@ export default async function ProfilePage({ params }) {
 
   const portfolio = data;
 
+  const formatMonthYear = (my) => {
+    if (!my) return "";
+    const [year, month] = my.split("-");
+    const monthName = new Date(year, month - 1).toLocaleString('default', { month: 'long' });
+    return `${monthName} ${year}`;
+  };
+
+  const currentMonthYear = new Date().toISOString().slice(0, 7);
+
   return (
     <div className="profile-page">
       {/* Hero Section */}
@@ -105,7 +114,28 @@ export default async function ProfilePage({ params }) {
       {/* Experience Section */}
       <section className="section experience-section">
         <h2>Experience</h2>
-        <p>{portfolio.experience || 'No experience listed.'}</p>
+        {portfolio.experience && portfolio.experience.length > 0 ? (
+          <div className="experience-list">
+            {portfolio.experience.map((exp, i) => (
+              <div key={i} className="experience-card">
+                <div className="experience-header">
+                  <div className="experience-left">
+                    <h3 className="company-name">{exp.company}</h3>
+                    <p className="role">{exp.role}</p>
+                  </div>
+                  <div className="experience-right">
+                    <p className="experience-dates">
+                      {formatMonthYear(exp.startMonthYear)} - {exp.endMonthYear === currentMonthYear ? "present" : formatMonthYear(exp.endMonthYear)}
+                    </p>
+                  </div>
+                </div>
+                <p className="experience-description">{exp.description}</p>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="empty-text">No experience listed.</p>
+        )}
       </section>
     </div>
   );
