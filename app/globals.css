@@ -677,3 +677,71 @@ textarea:focus {
   font-weight: 500;
   color: #16a34a;
 }
+
+/* Experience Cards */
+.experience-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.experience-card {
+  background-color: #f9fafb;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.experience-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+
+.experience-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.experience-left {
+  flex: 1;
+}
+
+.company-name {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+}
+
+.role {
+  /* display: flex;
+  align-items: baseline;
+  justify-content: left; */
+  float: left;
+  text-align: left;
+  font-size: 0.95rem;
+  color: #6b7280;
+  margin: 4px 0 0 0;
+}
+
+.experience-right {
+  text-align: right;
+}
+
+.experience-dates {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+.experience-description {
+  font-size: 0.95rem;
+  color: #4b5563;
+  line-height: 1.5;
+  margin: 0;
+}
