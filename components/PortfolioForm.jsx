@@ -22,6 +22,8 @@ export default function PortfolioForm() {
     projects: [{ name: "", description: "", link: "" }],
     skills: "",
     experience: [{ company: "", role: "", description: "", startMonthYear: "", endMonthYear: "" }],
+    theme: "blue",
+    customColor: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -74,6 +76,8 @@ export default function PortfolioForm() {
         projects: formData.projects,
         skills: formData.skills.split(",").map((s) => s.trim()),
         experience: formData.experience,
+          theme: formData.theme,
+        customColor: formData.customColor,
       },
     ]);
 
@@ -97,7 +101,7 @@ export default function PortfolioForm() {
           <div>
             <label>Username *</label>
             <div className="input-group">
-              <span className="input-prefix">foliofusion.com/profile/</span>
+              <span className="input-prefix">foliofusion.vercel.app/profile/</span>
               <input
                 type="text"
                 name="username"
@@ -278,6 +282,82 @@ export default function PortfolioForm() {
         <button type="button" onClick={addExperience} className="add-experience-btn">
           + Add Another Experience
         </button>
+      </section>
+
+      {/* Theme */}
+      <section>
+        <h2>Theme</h2>
+        <p>Choose an accent color for your profile page.</p>
+
+        <div className="theme-options">
+          <label>
+            <input
+              type="radio"
+              name="theme"
+              value="blue"
+              checked={formData.theme === "blue"}
+              onChange={handleChange}
+            />
+            Blue
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="theme"
+              value="green"
+              checked={formData.theme === "green"}
+              onChange={handleChange}
+            />
+            Green
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="theme"
+              value="purple"
+              checked={formData.theme === "purple"}
+              onChange={handleChange}
+            />
+            Purple
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="theme"
+              value="red"
+              checked={formData.theme === "red"}
+              onChange={handleChange}
+            />
+            Red
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="theme"
+              value="orange"
+              checked={formData.theme === "orange"}
+              onChange={handleChange}
+            />
+            Orange
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="theme"
+              value="custom"
+              checked={formData.theme === "custom"}
+              onChange={handleChange}
+            />
+            Custom
+          </label>
+          {formData.theme === "custom" && (
+            <input
+              type="color"
+              value={formData.customColor || "#3b82f6"}
+              onChange={(e) => setFormData({ ...formData, customColor: e.target.value })}
+            />
+          )}
+        </div>
       </section>
 
       {/* Submit */}
