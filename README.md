@@ -2,6 +2,10 @@
 
 > FolioFusion — a customizable developer portfolio generator that creates responsive, shareable portfolio pages at URLs like `foliofusion.vercel.app/profile/<username>`.
 
+Live at: https://foliofusion.vercel.app/
+
+Demo: https://drive.google.com/file/d/1DxW_1x3CRGCf75kKz2JC_T-YLdjqNk6W/view?usp=sharing
+
 ## Project Overview
 
 * **Name:** FolioFusion
@@ -13,11 +17,10 @@
 
 * User profile setup (name, bio, avatar, contact, social links).
 * Dynamic sections: projects, skills, experience, education, achievements, blogs, certifications, and custom sections.
-* Generate shareable portfolio at `foliofusion.com/profile/<username>`.
+* Generate shareable portfolio at `foliofusion.vercel.app/profile/<username>`.
 * Theme & layout customization: multiple templates + color palettes.
 * Responsive.
 * Export/Import JSON of profile data.
-* Authentication (email/password or OAuth — optional).
 
 ## Tech Stack (suggested)
 
