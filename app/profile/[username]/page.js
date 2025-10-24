@@ -1,6 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 import { notFound } from 'next/navigation';
 import '../../globals.css'; // ensure global styles are imported
+import ThemeSetter from './ThemeSetter';
 
 export default async function ProfilePage({ params }) {
   const resolvedParams = await params;
@@ -20,7 +21,7 @@ export default async function ProfilePage({ params }) {
 
   const { data, error } = await supabase
     .from('portfolios')
-    .select('*')
+    .select('username, name, title, bio, github, linkedin, twitter, projects, skills, experience, theme, customColor')
     .ilike('username', usernameDecoded.trim())
     .maybeSingle();
 
@@ -37,8 +38,51 @@ export default async function ProfilePage({ params }) {
 
   const currentMonthYear = new Date().toISOString().slice(0, 7);
 
+  const themeColors = {
+    blue: "#3b82f6",
+    green: "#10b981",
+    purple: "#8b5cf6",
+    red: "#ef4444",
+    orange: "#f97316",
+  };
+
+  const accentColor = portfolio.theme === "custom" ? (portfolio.customColor || "#3b82f6") : (themeColors[portfolio.theme] || "#3b82f6");
+
+  const hexToRgb = (hex) => {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}` : "59, 130, 246";
+  };
+
+  const accentRgb = hexToRgb(accentColor);
+
+  const darkenColor = (hex, percent) => {
+    const num = parseInt(hex.replace("#", ""), 16);
+    const amt = Math.round(2.55 * percent);
+    const R = (num >> 16) - amt;
+    const G = (num >> 8 & 0x00FF) - amt;
+    const B = (num & 0x0000FF) - amt;
+    return "#" + (0x1000000 + (R < 255 ? R < 1 ? 0 : R : 255) * 0x10000 +
+      (G < 255 ? G < 1 ? 0 : G : 255) * 0x100 +
+      (B < 255 ? B < 1 ? 0 : B : 255)).toString(16).slice(1);
+  };
+
+  const getBrightness = (hex) => {
+    const num = parseInt(hex.replace("#", ""), 16);
+    const r = (num >> 16) & 255;
+    const g = (num >> 8) & 255;
+    const b = num & 255;
+    return (r * 299 + g * 587 + b * 114) / 1000;
+  };
+
+  const accentDark = darkenColor(accentColor, 50);
+  const isDark = getBrightness(accentColor) < 128;
+  const accentText = isDark ? '#ffffff' : accentDark;
+
   return (
-    <div className="profile-page">
+  <>
+    <ThemeSetter accentColor={accentColor} accentRgb={accentRgb} accentDark={accentDark} accentText={accentText} />
+  <div style={{ display: 'none' }}>Accent: {accentColor}</div>
+  <div className="profile-page">
       {/* Hero Section */}
       <section className="hero-section">
         <div className="hero-content">
@@ -138,5 +182,6 @@ export default async function ProfilePage({ params }) {
         )}
       </section>
     </div>
+    </>
   );
 }
