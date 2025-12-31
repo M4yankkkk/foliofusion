@@ -1,27 +1,41 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-
-/* Apply Poppins globally */
+/* Modern Design System */
 * {
-  font-family: 'Poppins', sans-serif;
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 :root {
-  font-family: var(--font-poppins), sans-serif;
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+  --primary: 221.2 83.2% 53.3%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222.2 47.4% 11.2%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --accent: 210 40% 96.1%;
+  --accent-foreground: 222.2 47.4% 11.2%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 221.2 83.2% 53.3%;
+  --radius: 0.5rem;
 }
 
 body {
-   font-family: 'Poppins', sans-serif;
-  font-family: var(--font-poppins), sans-serif;
-}
-body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   margin: 0;
   overflow-x: hidden;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* ========== LANDING PAGE STYLES (PRESERVED) ========== */
 .squarediv {
   width: 100vw;
   height: 100vh;
@@ -53,13 +67,12 @@ body {
 .squarediv .square,
 .squarediv [class*="Square"],
 .squarediv [data-role="square"] {
-  width: var(--square-size, 40px); /* controlled by inline style or fallback */
+  width: var(--square-size, 40px);
   height: auto;
-  aspect-ratio: 1 / 1; /* keeps perfect square */
+  aspect-ratio: 1 / 1;
   max-width: 100%;
   box-sizing: border-box;
 }
-
 
 .title-container {
   position: absolute;
@@ -95,7 +108,6 @@ body {
   line-height: 1.1;
   margin-top: 2rem;
 }
-
 
 .logo-image {
   display: block;
@@ -144,10 +156,8 @@ body {
   background: rgba(255, 255, 255, 0.3);
 }
 
-
-
 .featurecards {
-  height: 200vh; /* change to larger value if you want more white space */
+  height: 200vh;
   background: #ffff;
   padding: 0rem 2rem 0;
   text-align: center;
@@ -164,7 +174,6 @@ body {
   font-size: 1.25rem;
   color: #6b7280;
   line-height: 1.6;
-  
   margin: 0 auto 5rem auto;
 }
 
@@ -180,7 +189,7 @@ body {
 .feature-card-wrapper {
   position: relative;
   display: flex;
-  grid-column: 1 / -1; /* Make each wrapper span the full grid width */
+  grid-column: 1 / -1;
 }
 
 .feature-card-wrapper.left {
@@ -237,7 +246,6 @@ body {
   margin: 0;
 }
 
-/* Connector Lines */
 .feature-card-wrapper:not(:last-child)::after {
   content: '';
   position: absolute;
@@ -247,98 +255,21 @@ body {
 }
 
 .feature-card-wrapper.left:not(:last-child)::after {
-  /* L-shape from left card down and to the right */  
   left: 37.5%;
   top: 50%;
-  /* bottom: 50%; */
   width: 50%;
-  height: 8rem; /* card height + row gap */
+  height: 8rem;
   border-width: 2px 2px 0px 0;
   border-top-right-radius: 1.5rem;  
 }
 
 .feature-card-wrapper.right:not(:last-child)::after {
-  /* L-shape from right card down and to the left */  
   right: 37.5%;
   top: 50%;
   width: 50%;
-  height: 8rem; /* card height + row gap */
+  height: 8rem;
   border-width: 2px 0 0px 2px;
   border-top-left-radius: 1.5rem;  
-}
-
-@media (max-width: 768px) {
-  .features-grid-container {
-    grid-template-columns: 1fr;
-  }
-  .feature-card-wrapper.left,
-  .feature-card-wrapper.right {
-    justify-content: center;
-  }
-  .feature-card-wrapper::after {
-    display: none; /* Hide connectors on mobile */
-  }
-
-  .feature-card {
-    width: 100%;
-    max-width: 350px;
-  }
-
-  /* Hero Section */
-  .title {
-    font-size: 3rem;
-    line-height: 1.2;
-  }
-
-  .description {
-    font-size: 1.1rem;
-    line-height: 1.5;
-  }
-
-  .logo-image {
-    max-width: 50%;
-  }
-
-  .floating-icon {
-    opacity: 0.15;
-  }
-
-  .button-container {
-    flex-direction: column;
-    align-items: center;
-    gap: 0.75rem;
-  }
-
-  .btn {
-    width: 80%;
-    max-width: 300px;
-  }
-
-  /* Features Section Header */
-  .featurecards {
-    height: auto;
-    padding-bottom: 4rem;
-  }
-
-  .featurecards h1 {
-    font-size: 2.25rem;
-  }
-
-  /* CTA Section */
-  .cta-section {
-    height: auto;
-    padding: 1rem 1rem;
-  }
-
-  .cta-section h2 {
-    font-size: 2rem;
-  }
-
-  /* Footer */
-  .footer-content {
-    flex-direction: column;
-    gap: 1.5rem;
-  }
 }
 
 .cta-section {
@@ -391,8 +322,65 @@ body {
   margin: 0;
 }
 
+@media (max-width: 768px) {
+  .features-grid-container {
+    grid-template-columns: 1fr;
+  }
+  .feature-card-wrapper.left,
+  .feature-card-wrapper.right {
+    justify-content: center;
+  }
+  .feature-card-wrapper::after {
+    display: none;
+  }
+  .feature-card {
+    width: 100%;
+    max-width: 350px;
+  }
+  .title {
+    font-size: 3rem;
+    line-height: 1.2;
+  }
+  .description {
+    font-size: 1.1rem;
+    line-height: 1.5;
+  }
+  .logo-image {
+    max-width: 50%;
+  }
+  .floating-icon {
+    opacity: 0.15;
+  }
+  .button-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .btn {
+    width: 80%;
+    max-width: 300px;
+  }
+  .featurecards {
+    height: auto;
+    padding-bottom: 4rem;
+  }
+  .featurecards h1 {
+    font-size: 2.25rem;
+  }
+  .cta-section {
+    height: auto;
+    padding: 1rem 1rem;
+  }
+  .cta-section h2 {
+    font-size: 2rem;
+  }
+  .footer-content {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}
 
-/* ---------- Profile Page Styles ---------- */
+/* ========== PUBLIC PROFILE PAGE STYLES (PRESERVED) ========== */
 /* Page Container */
 .profile-page {
   max-width: 1200px;

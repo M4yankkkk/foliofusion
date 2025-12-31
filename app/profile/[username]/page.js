@@ -2,6 +2,7 @@ import { createClient } from '@supabase/supabase-js';
 import { notFound } from 'next/navigation';
 import '../../globals.css'; // ensure global styles are imported
 import ThemeSetter from './ThemeSetter';
+import ProjectEmbed from '@/components/ProjectEmbed';
 
 export default async function ProfilePage({ params }) {
   const resolvedParams = await params;
@@ -19,15 +20,55 @@ export default async function ProfilePage({ params }) {
 
   const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-  const { data, error } = await supabase
-    .from('portfolios')
-    .select('username, name, title, bio, github, linkedin, twitter, projects, skills, experience, theme, customColor')
+  // Fetch user by username, then get their master profile
+  const { data: userData, error: userError } = await supabase
+    .from('users')
+    .select('id, username, email')
     .ilike('username', usernameDecoded.trim())
     .maybeSingle();
 
-  if (error || !data) return notFound();
+  if (userError) {
+    console.error('User lookup error:', userError);
+    return notFound();
+  }
+  
+  if (!userData) {
+    console.log('No user found with username:', usernameDecoded);
+    return notFound();
+  }
 
-  const portfolio = data;
+  // Fetch master profile for this user
+  const { data: profileData, error: profileError } = await supabase
+    .from('master_profiles')
+    .select('*')
+    .eq('user_id', userData.id)
+    .maybeSingle();
+
+  if (profileError) {
+    console.error('Profile lookup error:', profileError);
+    return notFound();
+  }
+  
+  if (!profileData) {
+    console.log('No profile found for user:', userData.id);
+    return notFound();
+  }
+
+  // Map to match old portfolio structure
+  const portfolio = {
+    username: userData.username,
+    name: profileData.name,
+    title: profileData.title,
+    bio: profileData.bio,
+    github: profileData.github,
+    linkedin: profileData.linkedin,
+    twitter: profileData.twitter,
+    projects: profileData.projects || [],
+    skills: profileData.skills || [],
+    experience: profileData.experience || [],
+    theme: profileData.theme,
+    customColor: profileData.custom_color,
+  };
 
   const formatMonthYear = (my) => {
     if (!my) return "";
@@ -122,15 +163,17 @@ export default async function ProfilePage({ params }) {
           <div className="projects-grid">
             {portfolio.projects.map((proj, i) => (
               <div key={i} className="project-card">
-                <a
-                  href={proj.link || '#'}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="project-title"
-                >
-                  {proj.name || 'Untitled Project'}
-                </a>
-                <p className="project-description">{proj.description}</p>
+                {proj.link ? (
+                  <ProjectEmbed url={proj.link} name={proj.name || 'Untitled Project'} />
+                ) : (
+                  <>
+                    <h3 className="project-title">{proj.name || 'Untitled Project'}</h3>
+                    <p className="project-description">{proj.description}</p>
+                  </>
+                )}
+                {proj.link && proj.description && (
+                  <p className="project-description mt-3">{proj.description}</p>
+                )}
               </div>
             ))}
           </div>

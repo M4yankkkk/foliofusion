@@ -91,17 +91,19 @@ export default function PortfolioForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="form-container">
+    <form onSubmit={handleSubmit} className="max-w-5xl mx-auto bg-white/90 backdrop-blur rounded-2xl border border-gray-100 shadow-sm p-8 space-y-8">
       {/* Basic Information */}
-      <section>
-        <h2>Basic Information</h2>
-        <p>Let's start with the essentials. You can add more details later.</p>
+      <section className="space-y-3">
+        <div>
+          <h2 className="text-xl font-semibold text-gray-900">Basic Information</h2>
+          <p className="text-sm text-gray-600">Let's start with the essentials. You can add more details later.</p>
+        </div>
 
-        <div className="grid-2">
-          <div>
-            <label>Username *</label>
-            <div className="input-group">
-              <span className="input-prefix">foliofusion.vercel.app/profile/</span>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="md:col-span-2">
+            <label className="block text-sm font-medium text-gray-700 mb-1">Username *</label>
+            <div className="flex items-center rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 focus-within:ring-2 focus-within:ring-blue-500">
+              <span className="text-xs text-gray-500 mr-2">foliofusion.vercel.app/profile/</span>
               <input
                 type="text"
                 name="username"
@@ -109,13 +111,14 @@ export default function PortfolioForm() {
                 onChange={handleChange}
                 required
                 placeholder="johndoe"
+                className="flex-1 bg-transparent text-sm focus:outline-none"
               />
             </div>
-            <p className="helper-text">This will be your unique portfolio URL.</p>
+            <p className="text-xs text-gray-500 mt-1">This will be your unique portfolio URL.</p>
           </div>
 
           <div>
-            <label>Full Name *</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
             <input
               type="text"
               name="name"
@@ -123,11 +126,12 @@ export default function PortfolioForm() {
               onChange={handleChange}
               required
               placeholder="John Doe"
+              className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
           <div>
-            <label>Professional Title *</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Professional Title *</label>
             <input
               type="text"
               name="title"
@@ -135,237 +139,252 @@ export default function PortfolioForm() {
               onChange={handleChange}
               required
               placeholder="Full Stack Developer"
+              className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
-          <div className="full-width">
-            <label>Bio</label>
+          <div className="md:col-span-2">
+            <label className="block text-sm font-medium text-gray-700 mb-1">Bio</label>
             <textarea
               name="bio"
               value={formData.bio}
               onChange={handleChange}
               placeholder="Tell us about yourself and your passion for development..."
               rows={3}
+              className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
         </div>
       </section>
 
       {/* Social Links */}
-      <section>
-        <h2>Social Links</h2>
-        <p>Add your developer profiles below.</p>
+      <section className="space-y-3">
+        <div>
+          <h2 className="text-xl font-semibold text-gray-900">Social Links</h2>
+          <p className="text-sm text-gray-600">Add your developer profiles below.</p>
+        </div>
 
-        <div className="grid-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label>GitHub</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">GitHub</label>
             <input
               type="url"
               name="github"
               value={formData.github}
               onChange={handleChange}
               placeholder="https://github.com/username"
+              className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
           <div>
-            <label>LinkedIn</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">LinkedIn</label>
             <input
               type="url"
               name="linkedin"
               value={formData.linkedin}
               onChange={handleChange}
               placeholder="https://linkedin.com/in/username"
+              className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
           <div>
-            <label>Twitter</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Twitter</label>
             <input
               type="url"
               name="twitter"
               value={formData.twitter}
               onChange={handleChange}
               placeholder="https://twitter.com/username"
+              className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
         </div>
       </section>
 
       {/* Featured Projects */}
-      <section>
-        <h2>Featured Projects</h2>
-        <p>Showcase your best work. Add project name, short description, and link.</p>
+      <section className="space-y-3">
+        <div>
+          <h2 className="text-xl font-semibold text-gray-900">Featured Projects</h2>
+          <p className="text-sm text-gray-600">Showcase your best work.</p>
+        </div>
 
-        {formData.projects.map((project, index) => (
-          <div key={index} className="project-card">
-            <input
-              type="text"
-              placeholder="Project Name"
-              value={project.name}
-              onChange={(e) =>
-                handleProjectChange(index, "name", e.target.value)
-              }
-            />
-            <textarea
-              placeholder="Short Description"
-              rows={2}
-              value={project.description}
-              onChange={(e) =>
-                handleProjectChange(index, "description", e.target.value)
-              }
-            />
-            <input
-              type="url"
-              placeholder="Project Link"
-              value={project.link}
-              onChange={(e) =>
-                handleProjectChange(index, "link", e.target.value)
-              }
-            />
-          </div>
-        ))}
-        <button type="button" onClick={addProject} className="add-project-btn">
-          + Add Another Project
-        </button>
+        <div className="space-y-4">
+          {formData.projects.map((project, index) => (
+            <div key={index} className="rounded-xl border border-gray-100 bg-gray-50/80 p-4 space-y-3">
+              <input
+                type="text"
+                placeholder="Project Name"
+                value={project.name}
+                onChange={(e) =>
+                  handleProjectChange(index, "name", e.target.value)
+                }
+                className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <textarea
+                placeholder="Short Description"
+                rows={2}
+                value={project.description}
+                onChange={(e) =>
+                  handleProjectChange(index, "description", e.target.value)
+                }
+                className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <input
+                type="url"
+                placeholder="Project Link"
+                value={project.link}
+                onChange={(e) =>
+                  handleProjectChange(index, "link", e.target.value)
+                }
+                className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <button
+                type="button"
+                onClick={() => {
+                  const updated = formData.projects.filter((_, i) => i !== index)
+                  setFormData({ ...formData, projects: updated })
+                }}
+                className="text-sm text-red-600 hover:text-red-800"
+              >
+                Remove Project
+              </button>
+            </div>
+          ))}
+          <button
+            type="button"
+            onClick={addProject}
+            className="px-4 py-2 rounded-lg bg-gray-100 text-gray-800 font-semibold hover:bg-gray-200"
+          >
+            + Add Another Project
+          </button>
+        </div>
       </section>
 
       {/* Skills */}
-      <section>
-        <h2>Skills & Technologies</h2>
+      <section className="space-y-3">
+        <h2 className="text-xl font-semibold text-gray-900">Skills & Technologies</h2>
         <input
           type="text"
           name="skills"
           value={formData.skills}
           onChange={handleChange}
           placeholder="React, Node.js, TypeScript, Docker"
+          className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </section>
 
       {/* Experience */}
-      <section>
-        <h2>Experience</h2>
-        <p>Share your professional experience.</p>
+      <section className="space-y-3">
+        <div>
+          <h2 className="text-xl font-semibold text-gray-900">Experience</h2>
+          <p className="text-sm text-gray-600">Share your professional experience.</p>
+        </div>
 
-        {formData.experience.map((exp, index) => (
-          <div key={index} className="experience-card">
-            <input
-              type="text"
-              placeholder="Company Name"
-              value={exp.company}
-              onChange={(e) => handleExperienceChange(index, "company", e.target.value)}
-            />
-            <input
-              type="text"
-              placeholder="Role"
-              value={exp.role}
-              onChange={(e) => handleExperienceChange(index, "role", e.target.value)}
-            />
-            <textarea
-              placeholder="Description"
-              rows={2}
-              value={exp.description}
-              onChange={(e) => handleExperienceChange(index, "description", e.target.value)}
-            />
-            <div className="month-year-inputs">
+        <div className="space-y-4">
+          {formData.experience.map((exp, index) => (
+            <div key={index} className="rounded-xl border border-gray-100 bg-gray-50/80 p-4 space-y-3">
               <input
-                type="month"
-                value={exp.startMonthYear}
-                onChange={(e) => handleExperienceChange(index, "startMonthYear", e.target.value)}
+                type="text"
+                placeholder="Company Name"
+                value={exp.company}
+                onChange={(e) => handleExperienceChange(index, "company", e.target.value)}
+                className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               <input
-                type="month"
-                value={exp.endMonthYear}
-                onChange={(e) => handleExperienceChange(index, "endMonthYear", e.target.value)}
+                type="text"
+                placeholder="Role"
+                value={exp.role}
+                onChange={(e) => handleExperienceChange(index, "role", e.target.value)}
+                className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
+              <textarea
+                placeholder="Description"
+                rows={2}
+                value={exp.description}
+                onChange={(e) => handleExperienceChange(index, "description", e.target.value)}
+                className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <input
+                  type="month"
+                  value={exp.startMonthYear}
+                  onChange={(e) => handleExperienceChange(index, "startMonthYear", e.target.value)}
+                  className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <input
+                  type="month"
+                  value={exp.endMonthYear}
+                  onChange={(e) => handleExperienceChange(index, "endMonthYear", e.target.value)}
+                  className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  const updated = formData.experience.filter((_, i) => i !== index)
+                  setFormData({ ...formData, experience: updated })
+                }}
+                className="text-sm text-red-600 hover:text-red-800"
+              >
+                Remove Experience
+              </button>
             </div>
-          </div>
-        ))}
-        <button type="button" onClick={addExperience} className="add-experience-btn">
-          + Add Another Experience
-        </button>
+          ))}
+          <button
+            type="button"
+            onClick={addExperience}
+            className="px-4 py-2 rounded-lg bg-gray-100 text-gray-800 font-semibold hover:bg-gray-200"
+          >
+            + Add Another Experience
+          </button>
+        </div>
       </section>
 
       {/* Theme */}
-      <section>
-        <h2>Theme</h2>
-        <p>Choose an accent color for your profile page.</p>
+      <section className="space-y-3">
+        <div>
+          <h2 className="text-xl font-semibold text-gray-900">Theme</h2>
+          <p className="text-sm text-gray-600">Choose an accent color for your profile page.</p>
+        </div>
 
-        <div className="theme-options">
-          <label>
-            <input
-              type="radio"
-              name="theme"
-              value="blue"
-              checked={formData.theme === "blue"}
-              onChange={handleChange}
-            />
-            Blue
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="theme"
-              value="green"
-              checked={formData.theme === "green"}
-              onChange={handleChange}
-            />
-            Green
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="theme"
-              value="purple"
-              checked={formData.theme === "purple"}
-              onChange={handleChange}
-            />
-            Purple
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="theme"
-              value="red"
-              checked={formData.theme === "red"}
-              onChange={handleChange}
-            />
-            Red
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="theme"
-              value="orange"
-              checked={formData.theme === "orange"}
-              onChange={handleChange}
-            />
-            Orange
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="theme"
-              value="custom"
-              checked={formData.theme === "custom"}
-              onChange={handleChange}
-            />
-            Custom
-          </label>
+        <div className="flex flex-wrap gap-3">
+          {['blue','green','purple','red','orange','custom'].map((theme) => (
+            <label key={theme} className="flex items-center gap-2 px-3 py-2 border border-gray-200 rounded-lg cursor-pointer text-sm">
+              <input
+                type="radio"
+                name="theme"
+                value={theme}
+                checked={formData.theme === theme}
+                onChange={handleChange}
+              />
+              <span className="capitalize">{theme}</span>
+            </label>
+          ))}
           {formData.theme === "custom" && (
             <input
               type="color"
               value={formData.customColor || "#3b82f6"}
               onChange={(e) => setFormData({ ...formData, customColor: e.target.value })}
+              className="h-10 w-20 border border-gray-200 rounded cursor-pointer"
             />
           )}
         </div>
       </section>
 
       {/* Submit */}
-      <div className="submit-section">
-        <button type="submit" disabled={loading}>
+      <div className="space-y-3">
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 shadow hover:from-blue-500 hover:to-indigo-500 disabled:bg-gray-300"
+        >
           {loading ? "Saving..." : "Create Portfolio"}
         </button>
-        {message && <p className="message">{message}</p>}
+        {message && (
+          <p className={`text-sm font-medium ${message.includes('✅') ? 'text-green-700' : 'text-red-700'}`}>
+            {message}
+          </p>
+        )}
       </div>
     </form>
   );
