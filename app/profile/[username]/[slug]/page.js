@@ -2,6 +2,7 @@ import { createClient } from '@supabase/supabase-js'
 import { notFound } from 'next/navigation'
 import '../../../globals.css'
 import ThemeSetter from '../ThemeSetter'
+import ProjectEmbed from '@/components/ProjectEmbed'
 
 export default async function TailoredProfilePage({ params }) {
   const resolvedParams = await params
@@ -180,15 +181,17 @@ export default async function TailoredProfilePage({ params }) {
             <div className="projects-grid">
               {portfolio.projects.map((proj, i) => (
                 <div key={i} className="project-card">
-                  <a
-                    href={proj.link || '#'}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="project-title"
-                  >
-                    {proj.name || 'Untitled Project'}
-                  </a>
-                  <p className="project-description">{proj.description}</p>
+                  {proj.link ? (
+                    <ProjectEmbed url={proj.link} name={proj.name || 'Untitled Project'} />
+                  ) : (
+                    <>
+                      <h3 className="project-title">{proj.name || 'Untitled Project'}</h3>
+                      <p className="project-description">{proj.description}</p>
+                    </>
+                  )}
+                  {proj.link && proj.description && (
+                    <p className="project-description mt-3">{proj.description}</p>
+                  )}
                 </div>
               ))}
             </div>

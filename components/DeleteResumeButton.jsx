@@ -15,17 +15,43 @@ export default function DeleteResumeButton({ resumeId, jobTitle }) {
     setIsDeleting(true)
 
     try {
+      // Get current user
+      const { data: { user }, error: authError } = await supabase.auth.getUser()
+      if (authError || !user) {
+        throw new Error('Not authenticated')
+      }
+
+      // First verify the resume belongs to the user via master_profile
+      const { data: resume, error: fetchError } = await supabase
+        .from('tailored_resumes')
+        .select('master_profile_id, master_profiles(user_id)')
+        .eq('id', resumeId)
+        .single()
+
+      if (fetchError) {
+        console.error('Fetch error:', fetchError)
+        throw new Error('Resume not found')
+      }
+
+      if (resume.master_profiles?.user_id !== user.id) {
+        throw new Error('Unauthorized')
+      }
+
+      // Now delete the resume
       const { error } = await supabase
         .from('tailored_resumes')
         .delete()
         .eq('id', resumeId)
 
-      if (error) throw error
+      if (error) {
+        console.error('Delete error:', error)
+        throw error
+      }
 
       router.refresh()
     } catch (err) {
       console.error('Delete error:', err)
-      alert('Failed to delete resume')
+      alert(err.message || 'Failed to delete resume')
     } finally {
       setIsDeleting(false)
       setShowConfirm(false)

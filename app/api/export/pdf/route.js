@@ -28,12 +28,17 @@ export async function POST(request) {
         .from('tailored_resumes')
         .select('*, master_profiles(*)')
         .eq('id', resumeId)
-        .eq('user_id', user.id)
         .single();
 
       if (resumeError || !resume) {
         console.error('Resume fetch error:', resumeError);
         return NextResponse.json({ error: 'Resume not found' }, { status: 404 });
+      }
+
+      // Verify user owns this resume through master profile
+      if (resume.master_profiles?.user_id !== user.id) {
+        console.error('Unauthorized: Resume belongs to different user');
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 403 });
       }
 
       console.log('Fetched tailored resume:', resume.id);
