@@ -45,7 +45,8 @@ const FeaturesGrid = () => {
         </div>
 
         {/* Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+        <div className="mx-auto max-w-5xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {/* Card 1: Master Profile - 2 cols */}
           <FeatureCard
             title="One Source of Truth"
@@ -184,6 +185,7 @@ const FeaturesGrid = () => {
               ))}
             </div>
           </FeatureCard>
+        </div>
         </div>
       </div>
     </section>
